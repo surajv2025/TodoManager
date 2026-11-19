@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Contact page
+{% endblock title %}
+
+{% block content %}
+<body class="bg-body-tertiary">
+
+<section class="container py-5">
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+        <span class="badge text-bg-primary mb-3">CONTACT US</span>
+
+        <h1 class="fw-bold display-5">
+            Get In Touch With Us
+        </h1>
+
+        <p class="text-secondary">
+            Have any questions? We would love to hear from you.
+        </p>
+    </div>
+
+    <!-- Messages Display (Optional: agar success message dikhana ho) -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row g-0 shadow-lg rounded-4 overflow-hidden bg-white">
+
+        <!-- Contact Information -->
+        <div class="col-lg-5">
+
+            <div class="bg-dark text-white p-4 p-md-5 h-100">
+
+                <h3 class="fw-bold mb-3">Contact Information</h3>
+
+                <p class="text-white-50 mb-5">
+                    Feel free to contact us anytime. We are always
+                    ready to help you.
+                </p>
+
+                <!-- Email -->
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-primary rounded-3 p-3 me-3">
+                        <span class="fs-4">✉</span>
+                    </div>
+
+                    <div>
+                        <h6 class="mb-1">Email Address</h6>
+                        <a href="mailto:svishwakarmaji792@gmail.com"
+                           class="text-white-50 text-decoration-none">
+                            svishwakarmaji792@gmail.com
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-primary rounded-3 p-3 me-3">
+                        <span class="fs-4">☎</span>
+                    </div>
+
+                    <div>
+                        <h6 class="mb-1">Phone Number</h6>
+                        <a href="tel:+919336533202"
+                           class="text-white-50 text-decoration-none">
+                            +91 93365 33202
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="d-flex align-items-center mb-5">
+                    <div class="bg-primary rounded-3 p-3 me-3">
+                        <span class="fs-4">⌖</span>
+                    </div>
+
+                    <div>
+                        <h6 class="mb-1">Our Address</h6>
+                        <p class="text-white-50 mb-0">
+                            Varanasi, Uttar Pradesh, India
+                        </p>
+                    </div>
+                </div>
+
+                <hr class="border-secondary">
+
+                <h6 class="mb-3">Follow Us</h6>
+
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light rounded-circle">F</a>
+                    <a href="#" class="btn btn-outline-light rounded-circle">I</a>
+                    <a href="#" class="btn btn-outline-light rounded-circle">L</a>
+                    <a href="#" class="btn btn-outline-light rounded-circle">X</a>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Contact Form -->
+        <div class="col-lg-7">
+
+            <div class="p-4 p-md-5">
+
+                <h3 class="fw-bold text-dark mb-2">
+                    Send Us a Message
+                </h3>
+
+                <p class="text-secondary mb-4">
+                    Fill in your details and send us your message.
+                </p>
+
+                <!-- 1. Method POST aur CSRF Token add kiya gaya hai -->
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="row g-4">
+
+                        <!-- Name -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Full Name
+                            </label>
+                            <!-- 2. name="full_name" add kiya gaya hai -->
+                            <input type="text"
+                                   name="full_name"
+                                   class="form-control form-control-lg"
+                                   placeholder="Your name" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">
+                                Email Address
+                            </label>
+                            <!-- 3. name="email" add kiya gaya hai -->
+                            <input type="email"
+                                   name="email"
+                                   class="form-control form-control-lg"
+                                   placeholder="Your email" required>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">
+                                Phone Number
+                            </label>
+                            <!-- 4. name="phone_number" add kiya gaya hai -->
+                            <input type="tel"
+                                   name="phone_number"
+                                   class="form-control form-control-lg"
+                                   placeholder="Your phone number">
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">
+                                Subject
+                            </label>
+                            <!-- 5. name="subject" add kiya gaya hai -->
+                            <input type="text"
+                                   name="subject"
+                                   class="form-control form-control-lg"
+                                   placeholder="Message subject" required>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">
+                                Message
+                            </label>
+                            <!-- 6. name="message" add kiya gaya hai -->
+                            <textarea name="message"
+                                      class="form-control"
+                                      rows="5"
+                                      placeholder="Write your message..." required></textarea>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="col-12">
+                            <!-- 7. type="submit" kiya gaya hai -->
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg px-5">
+                                Send Message →
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+
+{% endblock content %}

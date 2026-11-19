@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  TodoManager Pro - Smart Task & Workflow Management
+{% endblock title %}
+
+{% block content %}
+<!-- AOS Animation CSS & Custom Styling -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+  .hero-gradient {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 1.5rem;
+  }
+  .feature-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1) !important;
+  }
+  .step-number {
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .floating-img {
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+  }
+</style>
+
+<div class="container py-4">
+
+  <!-- 1. HERO SECTION -->
+  <div class="hero-gradient p-4 p-md-5 mb-5 shadow-sm">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 text-center text-lg-start" data-aos="fade-right" data-aos-duration="1000">
+        <span class="badge bg-primary text-white mb-3 px-3 py-2 rounded-pill shadow-sm">
+          ⚡ Built with Python, Django & MySQL
+        </span>
+        <h1 class="display-4 fw-bold text-dark lh-sm mb-3">
+          Master Your Daily Workflow with <span class="text-primary">TodoManager</span>
+        </h1>
+        <p class="lead text-secondary mb-4">
+          A full-stack task management platform engineered for speed, security, and clarity. Plan projects, track deadlines, and stay ahead of your goals effortlessly.
+        </p>
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-lg-start">
+          {% if user.is_authenticated %}
+            <a href="{% url 'todolist' %}" class="btn btn-primary btn-lg px-4 fw-bold shadow">Go to My Tasks →</a>
+          {% else %}
+            <a href="#" class="btn btn-primary btn-lg px-4 fw-bold shadow">Get Started Free</a>
+            <a href="#" class="btn btn-outline-dark btn-lg px-4 fw-semibold">Sign In</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-6 text-center" data-aos="fade-left" data-aos-duration="1000">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden floating-img">
+          <img src="{% static 'image/writing.jpg' %}" alt="Workspace" class="img-fluid" style="max-height: 380px; width: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80'">
+          <div class="card-footer bg-white py-3 border-0 d-flex justify-content-between align-items-center px-4">
+            <span class="text-success fw-bold small">● System Operational</span>
+            <span class="text-muted small">Django ORM + MySQL Powered</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. PROJECT METRICS / STATS BAR -->
+  <div class="row g-4 py-4 mb-5 text-center bg-white rounded-4 shadow-sm border" data-aos="zoom-in" data-aos-duration="800">
+    <div class="col-6 col-md-3 border-end">
+      <h2 class="fw-bold text-primary mb-0">100%</h2>
+      <p class="text-muted small mb-0">User Data Isolation</p>
+    </div>
+    <div class="col-6 col-md-3 border-end">
+      <h2 class="fw-bold text-success mb-0">CRUD</h2>
+      <p class="text-muted small mb-0">Full Database Operations</p>
+    </div>
+    <div class="col-6 col-md-3 border-end">
+      <h2 class="fw-bold text-warning mb-0">MySQL</h2>
+      <p class="text-muted small mb-0">Relational Backend</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <h2 class="fw-bold text-info mb-0">Responsive</h2>
+      <p class="text-muted small mb-0">Bootstrap 5 UI</p>
+    </div>
+  </div>
+
+  <!-- 3. CORE FEATURES SECTION (6 Cards Grid) -->
+  <div class="py-5">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h6 class="text-primary fw-bold text-uppercase tracking-wider">Architecture & Capabilities</h6>
+      <h2 class="display-6 fw-bold">Everything You Need to Stay Productive</h2>
+      <p class="text-muted col-md-7 mx-auto">Engineered with modern backend practices and clean frontend architecture to deliver a reliable task tracking experience.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 p-4 rounded-4 shadow-sm feature-card">
+          <div class="fs-2 mb-3">🔐</div>
+          <h4 class="fw-bold">Secure Authentication</h4>
+          <p class="text-muted small mb-0">Implements Django’s built-in session authentication and CSRF protection, ensuring each user accesses only their private task list.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 p-4 rounded-4 shadow-sm feature-card">
+          <div class="fs-2 mb-3">🗄️</div>
+          <h4 class="fw-bold">MySQL & Django ORM</h4>
+          <p class="text-muted small mb-0">Structured relational schemas powered by MySQL and Django ORM for fast querying, data integrity, and seamless CRUD operations.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 p-4 rounded-4 shadow-sm feature-card">
+          <div class="fs-2 mb-3">⚡</div>
+          <h4 class="fw-bold">Instant Task Updates</h4>
+          <p class="text-muted small mb-0">Create, edit, mark complete, or delete tasks with real-time status badges and clean form validation.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 p-4 rounded-4 shadow-sm feature-card">
+          <div class="fs-2 mb-3">📱</div>
+          <h4 class="fw-bold">Mobile-First Design</h4>
+          <p class="text-muted small mb-0">Crafted using Bootstrap 5 grid system and responsive utilities so your dashboard looks crisp on phones, tablets, and desktops.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 p-4 rounded-4 shadow-sm feature-card">
+          <div class="fs-2 mb-3">📩</div>
+          <h4 class="fw-bold">Integrated Support Form</h4>
+          <p class="text-muted small mb-0">Includes a dedicated Contact & Feedback module storing user messages directly into the database for admin review.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 p-4 rounded-4 shadow-sm feature-card">
+          <div class="fs-2 mb-3">🛡️</div>
+          <h4 class="fw-bold">Clean MVT Architecture</h4>
+          <p class="text-muted small mb-0">Follows Django’s Model-View-Template separation of concerns with modular URL routing and reusable base templates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. HOW IT WORKS (3-Step Workflow) -->
+  <div class="py-5 my-4 bg-light rounded-4 px-4 px-md-5 border">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="fw-bold">How It Works</h2>
+      <p class="text-muted">Get started in three simple steps</p>
+    </div>
+
+    <div class="row g-4 text-center">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="step-number bg-primary text-white mb-3 shadow">1</div>
+        <h5 class="fw-bold">Create Your Account</h5>
+        <p class="text-muted small">Register securely in seconds to unlock your personal workspace and task dashboard.</p>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-number bg-primary text-white mb-3 shadow">2</div>
+        <h5 class="fw-bold">Add & Organize Tasks</h5>
+        <p class="text-muted small">List down your daily targets, edit details anytime, and keep everything structured in one place.</p>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="step-number bg-success text-white mb-3 shadow">3</div>
+        <h5 class="fw-bold">Track & Complete</h5>
+        <p class="text-muted small">Mark tasks as completed as you progress and maintain a clear record of your achievements.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. TECH STACK SHOWCASE (Interviewer Focus) -->
+  <div class="py-5 text-center" data-aos="fade-up">
+    <h5 class="text-muted fw-semibold mb-4">Technologies Powering This Application</h5>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <span class="badge bg-dark fs-6 px-4 py-2 rounded-pill">Python 3</span>
+      <span class="badge bg-success fs-6 px-4 py-2 rounded-pill">Django Framework</span>
+      <span class="badge bg-primary fs-6 px-4 py-2 rounded-pill">MySQL Database</span>
+      <span class="badge bg-info text-dark fs-6 px-4 py-2 rounded-pill">Bootstrap 5</span>
+      <span class="badge bg-secondary fs-6 px-4 py-2 rounded-pill">HTML5 & CSS3</span>
+      <span class="badge bg-warning text-dark fs-6 px-4 py-2 rounded-pill">Django ORM</span>
+    </div>
+  </div>
+
+  <!-- 6. FINAL CALL TO ACTION BANNER -->
+  <div class="p-5 mb-4 bg-primary text-white rounded-4 shadow-lg text-center" data-aos="zoom-in">
+    <h2 class="display-6 fw-bold mb-3">Ready to Boost Your Productivity?</h2>
+    <p class="col-md-8 mx-auto fs-5 opacity-75 mb-4">
+      Start organizing your daily tasks with a fast, secure, and clean interface built on Django.
+    </p>
+    {% if user.is_authenticated %}
+      <a href="{% url 'todolist' %}" class="btn btn-light btn-lg px-5 rounded-pill fw-bold text-primary shadow">Open My Task List</a>
+    {% else %}
+      <a href="#" class="btn btn-light btn-lg px-5 rounded-pill fw-bold text-primary shadow">Start Using TodoManager</a>
+    {% endif %}
+  </div>
+
+</div>
+
+<!-- AOS Animation Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    once: true, // Animation ek baar smoothly chalega scroll karne par
+    offset: 80
+  });
+</script>
+{% endblock content %}

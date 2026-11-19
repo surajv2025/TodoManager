@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+   Login - TodoManager Pro
+{% endblock title %}
+
+{% block content %}
+<!-- AOS Animation CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+  /* Background gradient taki glassmorphism effect clear dikhe */
+  body {
+    background: linear-gradient(135deg, #0d6efd 0%, #6f42c1 100%);
+    min-height: 100vh;
+  }
+
+  /* Glassmorphism Card Effect */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1.25rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Form Inputs Styling for Glass theme */
+  .glass-card .form-control, .glass-card select {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .glass-card .form-control:focus {
+    background: #ffffff !important;
+    border-color: #ffffff;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.4);
+  }
+
+  /* Text colors override for clarity on glass */
+  .glass-text-light {
+    color: #ffffff !important;
+  }
+  .glass-text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+  }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center align-items-center min-vh-75">
+        <div class="col-md-7 col-lg-5" data-aos="zoom-in" data-aos-duration="1000">
+            
+            <div class="card glass-card p-4 p-md-5">
+                
+                <!-- Header Info -->
+                <div class="text-center mb-4">
+                    <span class="badge bg-white text-dark mb-2 px-3 py-2 rounded-pill fw-semibold shadow-sm">
+                        🔐 Welcome Back
+                    </span>
+                    <h2 class="fw-bold glass-text-light">User Login</h2>
+                    <p class="glass-text-muted small">Enter your credentials to access your task dashboard.</p>
+                </div>
+
+                <!-- Login Form -->
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    <!-- Crispy forms container -->
+                    <div class="mb-3 glass-text-light">
+                        {{ form|crispy }}
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-light btn-lg fw-bold text-primary shadow py-2">
+                            Login Now →
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Footer Link for Registration -->
+                <div class="text-center mt-4 border-top border-light border-opacity-25 pt-3">
+                    <p class="glass-text-muted small mb-0">
+                        Don't have an account? 
+                        <a href="#" class="text-white fw-bold text-decoration-underline">Register here</a>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- AOS Animation Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    once: true
+  });
+</script>
+{% endblock content %}
